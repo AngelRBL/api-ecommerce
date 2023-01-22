@@ -4,6 +4,7 @@
 
 #Env files
 *.env
+/mongo_data
 
 # Logs
 logs

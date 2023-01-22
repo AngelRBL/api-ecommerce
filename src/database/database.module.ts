@@ -9,10 +9,13 @@ import config from '../config';
   imports: [
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigType<typeof config>) => {
-        const { mongoUri } = configService;
+        const { mongo } = configService;
+        const { user, password, host, dbName, port, connection } = mongo;
+
+        const uri = `${connection}://${user}:${password}@${host}:${port}/${dbName}?authSource=admin&readPreference=primary`;
 
         return {
-          uri: mongoUri,
+          uri,
         };
       },
       inject: [config.KEY],
